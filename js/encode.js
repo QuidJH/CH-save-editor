@@ -22,7 +22,8 @@ function decodeNew(data) {
 	console.log("unparsed: " + data);
     old = false;
 	let result = data.slice(32);
-	//matches then zlib otherwise not zlib
+	//matches then zlib otherwise not zlib?
+	//appears not to work anymore due to possible anticheat change, very likely worth using recent ancient calc as base for new decode function
 	if(result == "7a990d405d2c6fb93aa8fbb0ec1a3b23") {
 		data = pako.inflate(atob(result), {to: 'string' });
 	}
