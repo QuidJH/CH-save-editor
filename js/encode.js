@@ -19,22 +19,21 @@ function decodeOld(data) {
 }
 
 function decodeNew(data) {
+	console.log("unparsed: " + data);
     old = false;
 	let result = data.slice(32);
 	//matches then zlib otherwise not zlib
 	if(result == "7a990d405d2c6fb93aa8fbb0ec1a3b23") {
-		pako.inflate(atob(result), {to: 'string' });
+		data = pako.inflate(atob(result), {to: 'string' });
 	}
 	else {
-		pako.inflateRaw(atob(result), {to: 'string' });
+		data = pako.inflateRaw(atob(result), {to: 'string' });
 	}
-	//let save = result == "7a990d405d2c6fb93aa8fbb0ec1a3b23" ? "zlib" : "deflate";
-	//data = save == "zlib" ? pako.inflate(atob(result), {to: 'string' }) : pako.inflateRaw(atob(result), {to: 'string' });
 	data = JSON.parse(data);
 	data.ow = "b3ac65fafc8c87215bd5ea573a8c5c72";
 	data.type = "new";
 	let tag = "This code is written and owned by Marin Legović";
-	console.log(data);
+	console.log("parsed: " + data);
 	return data;
 
 }
